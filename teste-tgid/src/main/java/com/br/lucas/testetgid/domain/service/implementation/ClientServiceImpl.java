@@ -12,6 +12,8 @@ import com.br.lucas.testetgid.domain.entity.client.PhoneClient;
 import com.br.lucas.testetgid.domain.repository.ClientRepository;
 import com.br.lucas.testetgid.domain.service.ClientService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,8 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class ClientServiceImpl implements ClientService {
+
+    private static final Logger log = LoggerFactory.getLogger(ClientServiceImpl.class);
 
     private final ClientRepository clientRepository;
 
@@ -76,12 +80,10 @@ public class ClientServiceImpl implements ClientService {
     }
 
     private void checkExistsClientByCpf(ClientInputDTO client) {
-        boolean existingClient = clientRepository.findByCpf(client.cpf())
-                .stream()
-                .anyMatch(c -> !c.getCpf().equals(client.cpf()));
+        Boolean existingClient = clientRepository.findByCpf(client.cpf()).isPresent();
 
-        if(existingClient) throw new ResourceWasNotCreatedException
-                ("Não foi possível o criar o Cliente " + client.name() + ". O mesmo já existe!");
+        if (existingClient) throw new ResourceWasNotCreatedException("Não foi possível o criar o Cliente "
+                + client.name() + ". Já existe um cliente com o CPF " + client.cpf());
     }
 
     private LinkedHashSet<PhoneClient> extractedPhones(List<PhonesClientInputDTO> phonesClientDTOs, Client client) {
