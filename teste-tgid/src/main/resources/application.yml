@@ -4,6 +4,9 @@ spring:
   output:
     ansi:
       enabled: always
+  devtools:
+    restart:
+      enabled: true
   datasource:
     url: jdbc:mysql://localhost:3306/teste_tgid?createDatabaseIfNotExist=true&serverTimezone=UTC&characterEncoding=utf8
     username: root
