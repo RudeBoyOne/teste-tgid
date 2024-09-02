@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: teste-tgid
+  output:
+    ansi:
+      enabled: always
+  datasource:
+    url: jdbc:mysql://localhost:3306/teste_tgid?createDatabaseIfNotExist=true&serverTimezone=UTC&characterEncoding=utf8
+    username: root
+    password: testetgid
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
