@@ -1,6 +1,6 @@
 package com.br.lucas.testetgid.api.model.input;
 
-import com.br.lucas.testetgid.api.validator.CPF;
+import com.br.lucas.testetgid.api.validator.cpf.CPF;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
@@ -10,6 +10,6 @@ public record ClientInputDTO (
         @NotBlank
         @CPF
         String cpf,
-        List<AddressClientInputDTO> addresses,
-        List<PhonesClientInputDTO> phones
+        List<AddressInputDTO> addresses,
+        List<PhonesInputDTO> phones
 ) {}

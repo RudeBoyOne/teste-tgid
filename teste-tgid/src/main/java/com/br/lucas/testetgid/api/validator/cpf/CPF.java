@@ -1,4 +1,4 @@
-package com.br.lucas.testetgid.api.validator;
+package com.br.lucas.testetgid.api.validator.cpf;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

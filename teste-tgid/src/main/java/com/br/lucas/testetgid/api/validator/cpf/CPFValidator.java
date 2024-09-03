@@ -1,4 +1,4 @@
-package com.br.lucas.testetgid.api.validator;
+package com.br.lucas.testetgid.api.validator.cpf;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -15,28 +15,23 @@ public class CPFValidator implements ConstraintValidator<CPF, String> {
             return false;
         }
 
-        // Remove caracteres não numéricos
         String sanitizedCPF = cpf.replaceAll("\\D", "");
 
         if (!isValidLengthAndUniqueDigits(sanitizedCPF)) {
             return false;
         }
 
-        // Calcula e verifica os dígitos verificadores
         return validateVerifierDigits(sanitizedCPF);
     }
 
     private boolean isValidLengthAndUniqueDigits(String cpf) {
-        // Verifica se o CPF tem 11 dígitos e se todos os dígitos não são iguais
         return cpf.length() == 11 && !cpf.matches("(\\d)\\1{10}");
     }
 
     private boolean validateVerifierDigits(String cpf) {
-        // Calcula os dígitos verificadores
         int firstVerifierDigit = calculateFirstVerifierDigit(cpf);
         int secondVerifierDigit = calculateSecondVerifierDigit(cpf, firstVerifierDigit);
 
-        // Verificação final dos dígitos, comparando com os dígitos atuais do CPF
         return firstVerifierDigit == Character.getNumericValue(cpf.charAt(9)) &&
                 secondVerifierDigit == Character.getNumericValue(cpf.charAt(10));
     }
@@ -55,7 +50,7 @@ public class CPFValidator implements ConstraintValidator<CPF, String> {
         for (int i = 0; i < 9; i++) {
             sum += (Character.getNumericValue(cpf.charAt(i))) * (11 - i);
         }
-        sum += firstVerifierDigit * 2; // Multiplica o primeiro dígito verificador por 2
+        sum += firstVerifierDigit * 2;
         int remainder = sum % 11;
         return remainder < 2 ? 0 : 11 - remainder;
     }

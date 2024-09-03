@@ -1,6 +1,6 @@
 package com.br.lucas.testetgid.api.model.input;
 
-public record AddressClientInputDTO(
+public record AddressInputDTO(
         String cep,
         String street,
         String number,

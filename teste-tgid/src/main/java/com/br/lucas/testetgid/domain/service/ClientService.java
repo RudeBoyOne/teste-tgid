@@ -15,5 +15,4 @@ public interface ClientService {
 
     void deleteAClient(Integer ClientId);
 
-    ClientOutputDTO updateClient(Integer id, ClientInputDTO clientInputDTO);
 }

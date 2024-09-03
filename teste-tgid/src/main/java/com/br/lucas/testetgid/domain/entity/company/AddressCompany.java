@@ -1,13 +1,13 @@
 package com.br.lucas.testetgid.domain.entity.company;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 public class AddressCompany {
 
@@ -17,22 +17,26 @@ public class AddressCompany {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_address_company;
 
+    @NonNull
     @Column(nullable = false)
     private String cep;
 
+    @NonNull
     @Column(nullable = false)
     private String street;
 
+    @NonNull
     @EqualsAndHashCode.Include
     @Column(nullable = false)
     private String number;
 
+    @NonNull
     @Column(nullable = false)
     private String city;
 
     @ManyToOne
     @JoinColumn(
-            name = "id_company",
+            name = "company_id",
             nullable = false
     )
     private Company company;

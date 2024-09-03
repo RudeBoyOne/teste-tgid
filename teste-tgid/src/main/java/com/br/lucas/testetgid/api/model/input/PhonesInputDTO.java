@@ -1,5 +1,5 @@
 package com.br.lucas.testetgid.api.model.input;
 
-public record PhonesClientInputDTO(
+public record PhonesInputDTO(
    String phone
 ) {}
